@@ -4,7 +4,7 @@ class connection {
     private $my_Data_Base;
 
             private $host = '127.0.0.1';
-            private $db   = 'crm';
+            private $db   = 'chanicrm';
             private $user = 'root';
             private $pass = '';
             private $charset = 'utf8';

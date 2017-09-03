@@ -6,13 +6,7 @@ var phone;
 var product_id;
 var Lead_id;
 
-// function constructor for leads
-function leads(id, lead_name, lead_phone, product_id) {
-    this.id = id;
-    this.lead_name = lead_name;
-    this.lead_phone = lead_phone;
-    this.product_id = product_id;
-}
+
 
 // function constructor for propects
 function Prospect(id, prospect_name, prospect_phone, lead_id) {

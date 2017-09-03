@@ -1,18 +1,16 @@
 // AJAX function
-function sendAJAX(type) {
+function sendAJAX(type, param) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
 
         if (this.readyState == 4 && this.status == 200) {
-
-
             // return the data to the client according to the type that was selected
             switch (type) {
 
                 case 'select':
                     var data = JSON.parse(this.responseText);
                     for (let i = 0; i < data.length; i++) {
-                        leadsArray.push(new leads(
+                        leadsArray.push(new lead(
                             data[i].id,
                             data[i].lead_name,
                             data[i].lead_phone,
@@ -94,24 +92,28 @@ function sendAJAX(type) {
 
                 default:
                     $("#result").html("error");
-
-
             }
         }
-
     }
 
+    if (!param) { 
+        console.warn('[Deprecated] Params should pass to sendAjax');
+        param =
+            "../../server/API.php?" +
+            "q=" + type +
+            "&name=" + name +
+            "&id=" + id +
+            "&phone=" + phone +
+            "&product_id=" + product_id +
+            "&Lead_id=" + Lead_id;
+    }
+    
+    const verb = 
+        type == 'create' ? "POST" :
+        type == 'select' ? "GET": 
+        type == 'update' ? "PUT" : "GET";
 
-    var param =
-        "../../server/API.php?" +
-        "q=" + type +
-        "&name=" + name +
-        "&id=" + id +
-        "&phone=" + phone +
-        "&product_id=" + product_id +
-        "&Lead_id=" + Lead_id;
-
-    xhttp.open("GET", param, true);
+    xhttp.open(verb, param, true);
     // xhttp.open("GET", "../server/API.php", true);
     xhttp.send();
 }
